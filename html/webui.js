@@ -205,6 +205,10 @@
     const all = els.showAll.checked ? "1" : "0";
     const result = await apiFetch(`/containers/json?all=${all}`);
     state.containers = Array.isArray(result.body) ? result.body : [];
+    state.containers.sort((a, b) => {
+      const nameOf = (c) => ((c.Names && c.Names[0]) || c.Id || "").replace(/^\/+/, "");
+      return nameOf(a).localeCompare(nameOf(b), undefined, { numeric: true, sensitivity: "base" });
+    });
     setText(els.consoleContainers, `${state.containers.length} container(s)`);
   }
 
