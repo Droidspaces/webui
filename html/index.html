@@ -139,10 +139,15 @@
 
     <div class="divider"></div>
 
-    <section class="section details-section" id="details" hidden>
-      <div class="container">
-        <div class="section-label">Inspect</div>
-        <h2 id="details-title">Container details</h2>
+    <div class="modal-overlay" id="details" hidden>
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="details-title">
+        <div class="modal-head">
+          <div>
+            <div class="section-label">Inspect</div>
+            <h2 id="details-title">Container details</h2>
+          </div>
+          <button class="modal-close" id="details-close" type="button" aria-label="Close details">×</button>
+        </div>
         <div class="details-grid">
           <div class="req-card detail-card">
             <h3>Summary</h3>
@@ -159,9 +164,7 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <div class="divider"></div>
+    </div>
 
     <section class="section diagnostics-section" id="diagnostics">
       <div class="container">

@@ -27,6 +27,7 @@
     empty: $("empty-state"),
     alert: $("global-alert"),
     details: $("details"),
+    detailsClose: $("details-close"),
     detailsTitle: $("details-title"),
     detailsSummary: $("details-summary"),
     detailsJson: $("details-json"),
@@ -360,7 +361,6 @@
         summaryRow("IP address", network.IPAddress || data.IPAddress)
       ].join("");
       setText(els.detailsJson, JSON.stringify(data, null, 2));
-      location.hash = "details";
     } catch (err) {
       setAlert(`inspect failed for ${ref}: ${err.message}`);
     }
@@ -436,6 +436,15 @@
     els.manualForm.addEventListener("submit", (event) => {
       event.preventDefault();
       manualGet(els.manualPath.value);
+    });
+    els.detailsClose.addEventListener("click", () => {
+      els.details.hidden = true;
+    });
+    els.details.addEventListener("click", (event) => {
+      if (event.target === els.details) els.details.hidden = true;
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !els.details.hidden) els.details.hidden = true;
     });
   }
 
