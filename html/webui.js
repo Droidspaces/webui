@@ -453,6 +453,19 @@
   document.addEventListener("DOMContentLoaded", () => {
     setupThemeToggle();
     bindEvents();
-    refreshDashboard();
+
+    const splash = $("splash");
+    const minDelay = new Promise((resolve) => setTimeout(resolve, 500));
+    const loaded = Promise.race([
+      refreshDashboard().catch(() => {}),
+      new Promise((resolve) => setTimeout(resolve, 4000))
+    ]);
+
+    Promise.all([minDelay, loaded]).then(() => {
+      splash.classList.add("done");
+      setTimeout(() => {
+        splash.hidden = true;
+      }, 350);
+    });
   });
 })();
