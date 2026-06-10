@@ -747,8 +747,14 @@ h3 {
 }
 
 .card-actions .btn {
+  flex: 1;
   padding: 0.5rem 0.9rem;
   font-size: 0.8rem;
+}
+
+.card-actions .btn:only-child {
+  flex: 0 0 80%;
+  margin: 0 auto;
 }
 
 .empty-state {

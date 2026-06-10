@@ -249,9 +249,11 @@
           <div class="meta-item"><div class="meta-label">Started</div><div class="meta-value">${escapeHtml(formatCreated(container.Created))}</div></div>
         </div>
         <div class="card-actions">
-          ${running ? actionButton("stop", "Stop", container, "btn-danger") : actionButton("start", "Start", container, "btn-primary")}
-          ${actionButton("restart", "Restart", container, "btn-ghost")}
-          ${actionButton("inspect", "Inspect", container, "btn-ghost")}
+          ${running
+            ? actionButton("stop", "Stop", container, "btn-danger") +
+              actionButton("restart", "Restart", container, "btn-ghost") +
+              actionButton("inspect", "Inspect", container, "btn-ghost")
+            : actionButton("start", "Start", container, "btn-primary")}
         </div>
       </article>`;
   }
