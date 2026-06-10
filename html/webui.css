@@ -518,17 +518,47 @@ h3 {
 }
 
 .alert {
-  background: rgba(255, 107, 107, 0.08);
+  position: fixed;
+  top: 72px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  width: min(640px, calc(100vw - 2rem));
+  background: linear-gradient(rgba(255, 107, 107, 0.08), rgba(255, 107, 107, 0.08)) var(--bg2);
   color: var(--red);
   border: 1px solid rgba(255, 107, 107, 0.22);
   border-radius: 10px;
   padding: 0.85rem 1rem;
-  margin-bottom: 1rem;
   font-size: 0.86rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  animation: alert-in 0.2s ease-out;
+}
+
+@keyframes alert-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.alert.out {
+  animation: alert-out 0.18s ease-in forwards;
+}
+
+@keyframes alert-out {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
 }
 
 .alert[hidden] {
@@ -559,7 +589,7 @@ h3 {
 }
 
 .alert.ok {
-  background: rgba(62, 207, 142, 0.08);
+  background: linear-gradient(rgba(62, 207, 142, 0.08), rgba(62, 207, 142, 0.08)) var(--bg2);
   color: var(--green);
   border-color: rgba(62, 207, 142, 0.22);
 }

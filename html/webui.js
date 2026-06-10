@@ -103,11 +103,22 @@
     setText(els.badgeText, message);
   }
 
+  let alertTimer = 0;
+  let alertHideTimer = 0;
+
   function setAlert(message, ok) {
+    clearTimeout(alertTimer);
+    clearTimeout(alertHideTimer);
+    els.alert.classList.remove("out");
+
     if (!message) {
-      els.alert.hidden = true;
-      els.alert.textContent = "";
-      els.alert.classList.remove("ok");
+      if (els.alert.hidden) return;
+      els.alert.classList.add("out");
+      alertHideTimer = setTimeout(() => {
+        els.alert.hidden = true;
+        els.alert.textContent = "";
+        els.alert.classList.remove("ok", "out");
+      }, 180);
       return;
     }
     els.alert.hidden = false;
@@ -125,6 +136,10 @@
     close.addEventListener("click", () => setAlert(""));
 
     els.alert.append(text, close);
+
+    if (ok) {
+      alertTimer = setTimeout(() => setAlert(""), 4000);
+    }
   }
 
   async function apiFetch(path, options) {
@@ -230,7 +245,7 @@
           <div class="meta-item"><div class="meta-label">Image</div><div class="meta-value" title="${escapeHtml(image)}">${escapeHtml(image)}</div></div>
           <div class="meta-item"><div class="meta-label">Status</div><div class="meta-value" title="${escapeHtml(status)}">${escapeHtml(status)}</div></div>
           <div class="meta-item"><div class="meta-label">Ports</div><div class="meta-value" title="${escapeHtml(ports)}">${escapeHtml(ports)}</div></div>
-          <div class="meta-item"><div class="meta-label">Created</div><div class="meta-value">${escapeHtml(formatCreated(container.Created))}</div></div>
+          <div class="meta-item"><div class="meta-label">Started</div><div class="meta-value">${escapeHtml(formatCreated(container.Created))}</div></div>
         </div>
         <div class="card-actions">
           ${running ? actionButton("stop", "Stop", container, "btn-danger") : actionButton("start", "Start", container, "btn-primary")}
