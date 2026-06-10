@@ -254,10 +254,10 @@
         </div>
         <div class="card-actions">
           ${running
-            ? actionButton("stop", "Stop", container, "btn-danger") +
-              actionButton("restart", "Restart", container, "btn-ghost") +
-              actionButton("inspect", "Inspect", container, "btn-ghost")
-            : actionButton("start", "Start", container, "btn-primary")}
+        ? actionButton("stop", "Stop", container, "btn-danger") +
+        actionButton("restart", "Restart", container, "btn-ghost") +
+        actionButton("inspect", "Inspect", container, "btn-ghost")
+        : actionButton("start", "Start", container, "btn-primary")}
         </div>
       </article>`;
   }
@@ -461,7 +461,7 @@
     const splash = $("splash");
     const minDelay = new Promise((resolve) => setTimeout(resolve, 500));
     const loaded = Promise.race([
-      refreshDashboard().catch(() => {}),
+      refreshDashboard().catch(() => { }),
       new Promise((resolve) => setTimeout(resolve, 4000))
     ]);
 
