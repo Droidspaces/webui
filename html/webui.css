@@ -218,6 +218,7 @@ nav {
 
 .webui-hero-inner {
   max-width: 1100px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
   gap: 4rem;
