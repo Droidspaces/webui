@@ -111,8 +111,20 @@
       return;
     }
     els.alert.hidden = false;
-    els.alert.textContent = message;
+    els.alert.textContent = "";
     els.alert.classList.toggle("ok", Boolean(ok));
+
+    const text = document.createElement("span");
+    text.textContent = message.charAt(0).toUpperCase() + message.slice(1);
+
+    const close = document.createElement("button");
+    close.type = "button";
+    close.className = "alert-close";
+    close.setAttribute("aria-label", "Dismiss alert");
+    close.textContent = "×";
+    close.addEventListener("click", () => setAlert(""));
+
+    els.alert.append(text, close);
   }
 
   async function apiFetch(path, options) {
